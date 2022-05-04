@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  postgres_db05:
+    image: postgres:14-alpine
+    container_name: "postgres05"
+    environment:
+      - "POSTGRES_PASSWORD=password1234"
+      - "POSTGRES_DB=antony_juarezdb"
+      - "POSTGRES_USER=antony_juarez"
+    ports:
+      - "10005:5505"
+    volumes:
+      - "/home/antony_juarez/postgres:/usr/src/postgres"
+    networks:
+      - our-library-net
+    command: "-p 5505"
+
+  web05:
+    build: .
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8005"
+    container_name: "django05"
+    depends_on: 
+      - postgres_db05
+    environment:
+      PSQL_DBNAME: "antony_juarezdb"
+      PSQL_USERNAME: "antony_juarez"
+      PSQL_PASS: "password1234"
+      PSQL_PASSWORD: "password1234"
+      PSQL_HOST: "postgres_db05"
+      PSQL_PORT: "5505"
+      JWT_TOKEN_TIME: "120"
+    volumes:
+      - "/home/antony_juarez/musicProject:/usr/src/django/musicStore"
+    ports:
+      - "9005:8005"
+    networks:
+      - our-library-net
+networks:
+  our-library-net:
+    external: true
+    driver: bridge
