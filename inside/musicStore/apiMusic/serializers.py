@@ -22,17 +22,20 @@ class AlbumSerializer(serializers.HyperlinkedModelSerializer):
         fields = [
             "id",
             "name",
-            "releaseDate",
             "price",
+            "cdPrice",
+            "numTracks",
             "stock",
             "image",
+            "singerA",
             "duration",
             "recordLabel",
+            "releaseDate",
         ]
     def to_representation(self, instance):
         rep = super(AlbumSerializer, self).to_representation(instance)
-        rep['singer'] = instance.singer.name
-        return rep
+        rep['singerA'] = instance.singerA.stageName
+        return rep 
 
 class GenreSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -41,7 +44,7 @@ class GenreSerializer(serializers.HyperlinkedModelSerializer):
             "id",
             "name",
         ]
-
+        
 class SongSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Song
@@ -50,7 +53,7 @@ class SongSerializer(serializers.HyperlinkedModelSerializer):
             "name",
             "album",
             "genre",
-            "releaseDate",
+            "singers",
             "duration",
             "completeFile",
             "previewFile",
@@ -61,6 +64,32 @@ class SongSerializer(serializers.HyperlinkedModelSerializer):
         rep = super(SongSerializer, self).to_representation(instance)
         rep['album'] = instance.album.name
         rep['genre'] = instance.genre.name
-        rep['singers'] = instance.singers.name
+        rep['singers'] = instance.singers.stageName
         return rep       
+        
+class SingleSongSerializer(serializers.HyperlinkedModelSerializer):
+    singerSingle = serializers.StringRelatedField(many=True, read_only=True)    
+    class Meta:
+        model = SingleSong
+        fields = [
+            "id",
+            "name",
+            "genre",
+            "singerSingle",
+            "duration",
+            "completeFile",
+            "previewFile",
+            "price",
+            "recordLabel",
+            "image",
+            "releaseDate",
+        ]
+    def to_representation(self, instance):
+        rep = super(SingleSongSerializer, self).to_representation(instance)
+        rep['genre'] = instance.genre.name
+        return rep   
 
+class SinglesSingersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SinglesSingers
+        fields = ['id', 'song', 'singer']        
