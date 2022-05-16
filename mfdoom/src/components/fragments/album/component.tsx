@@ -145,7 +145,7 @@ const AlbumFragment:FC<AlbumFragmentProps> = ({id,name,price,cdPrice,numTracks,s
         <Table sx={{ minWidth: 650 }} aria-label="caption table">
         <caption></caption>
         <TableBody>
-        {songs.slice(0, 8).map((song) => (
+        {songs.map((song) => (
               <SongFragment {...song} 
               key={`song-${song.id}`} 
               />

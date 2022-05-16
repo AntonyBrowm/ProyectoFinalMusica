@@ -16,13 +16,20 @@ import {Box} from "@mui/system";
 import { useAppSelector } from "./app/hooks";
 import { tokenSelector } from "./features/authSlice";
 import { useEffect, useMemo } from "react";
-const publicPaths = ["/login", "/", "/search", "/account", "/album/:id", "/singer/:id", "/single/:id"];
+
 
 const App = () => {
-  const token = useAppSelector(tokenSelector);
-  const location = useLocation();
-  const navigate = useNavigate();
-  console.log(token);
+
+const publicPaths = ["/login", "/", "/search", "/account", "/album/:id", "/singer/:id", "/single/:id"];
+const token = useAppSelector(tokenSelector);
+const location = useLocation();
+const navigate = useNavigate();
+useEffect(() => {
+const publicPath = publicPaths.some((path) => path === location.pathname);
+
+if (token === undefined && !publicPath) navigate('/login');  
+}, [location, navigate, token  ])
+
   const haveBar = useMemo(() => location.pathname !== "/login", [location]);
 
   const styles: Styles = {

@@ -11,9 +11,25 @@ import {Styles} from "./theme/types";
 import { SingleBioFragmentProps } from "./types";
 import { useAppSelector } from "../../../app/hooks";
 import {singlesSelector } from "../../../features/musicSlice";
+import {playerSelector} from "../../../features/playerSlice";
+import Player from '../../bar_player/player';
 import SingleFragment from "../single/component";
+import { useEffect, useState } from 'react';
+
 const SingleBioFragment:FC<SingleBioFragmentProps> = ({id,name,duration,price,image,releaseDate,completeFile,}) => {
   const singles = useAppSelector(singlesSelector);
+
+  const playerUrl = useAppSelector(playerSelector);
+  const [showPlayer, setShowPlayer] = useState<Boolean>(false);
+
+  useEffect(() => {
+      if (playerUrl === 'undefined') {
+          setShowPlayer(false);
+      }else{
+           setShowPlayer(true);
+      }
+  }, [playerUrl])
+
     const BootstrapButton = styled(Button)({
         boxShadow: 'none',
         textTransform: 'none',
@@ -149,6 +165,7 @@ const SingleBioFragment:FC<SingleBioFragmentProps> = ({id,name,duration,price,im
         </Table>
         </TableContainer>
         </Box>
+        { showPlayer ? <Player /> : null }
         </>
         );
 };

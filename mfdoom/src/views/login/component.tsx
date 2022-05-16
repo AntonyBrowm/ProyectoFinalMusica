@@ -10,8 +10,6 @@ import { initialValues, loginUser, validationSchema } from "./form";
 const Login = () => {
   const navigate = useNavigate();
   const token = useAppSelector(tokenSelector);
-  console.log(token);
-
   useEffect(() => {
     if (token !== undefined) navigate("/");
   }, [navigate, token]);

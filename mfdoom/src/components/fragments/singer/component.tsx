@@ -12,6 +12,7 @@ import SongFragment from "../song/component";
 import SingleFragment from "../single/component";
 import {Styles} from "./theme/types";
 import { SingerFragmentProps } from "./types";
+
 const SingerFragment:FC<SingerFragmentProps> = ({id,name,stageName,lastName,nationality,image,biography
 }) => {
     const songs = useAppSelector(songsSelector);
@@ -134,6 +135,7 @@ const SingerFragment:FC<SingerFragmentProps> = ({id,name,stageName,lastName,nati
                 </Box>
         </Box>   
         <Box sx={styles.container}> 
+        <Typography sx={styles.Singer}>Album Songs</Typography>
         <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="caption table">
         <caption></caption>
@@ -148,6 +150,7 @@ const SingerFragment:FC<SingerFragmentProps> = ({id,name,stageName,lastName,nati
         </TableContainer>
         </Box>
         <Box sx={styles.container}> 
+        <Typography sx={styles.Singer}>Singles</Typography>
         <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="caption table">
         <caption></caption>

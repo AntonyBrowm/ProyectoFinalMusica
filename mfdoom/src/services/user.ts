@@ -17,7 +17,6 @@ export const fetchLogin = (user: LoginDTO) => async (dispatch: AppDispatch) => {
     if (response.status !== 200) return "";
 
     const userAuth = await response.json();
-    console.log(userAuth);
     dispatch(setAuth(userAuth));
   } catch (err) {
     throw err;

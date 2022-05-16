@@ -41,6 +41,9 @@ export const MusicSlice = createSlice({
     setSingle: (state, action) => {
       state.single = action.payload;
     },
+    setSelectedSingle: (state, action) => {
+      state.single = action.payload;
+  }
   },
 });
 
@@ -56,6 +59,7 @@ export const {
   setSongs,
   setSingles,
   setSingle,
+  setSelectedSingle,
 } = MusicSlice.actions;
 
 export default MusicSlice.reducer;

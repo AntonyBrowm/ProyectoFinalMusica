@@ -2,3 +2,11 @@
   height:100%;
   
 }
+.transition-fade {
+  transition: 0.8s;
+  opacity: 10;
+}
+
+html.is-animating .transition-fade {
+  opacity: 0;
+}

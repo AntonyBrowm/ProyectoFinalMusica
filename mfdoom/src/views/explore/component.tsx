@@ -1,4 +1,4 @@
-import { Box} from "@mui/material";
+import { Box, Typography} from "@mui/material";
 import AlbumCard from "../../components/cards/album/component";
 import ArtistCard from "../../components/cards/artist/component";
 import SingleCard from "../../components/cards/single/component";
@@ -33,8 +33,7 @@ const styles: Styles={
         borderRadius: "15px",
         height: "auto",
         display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
+
     },
      albumsList: {
       width: "fit-content",
@@ -56,8 +55,7 @@ const styles: Styles={
         overflowX: "auto",
         gap: "60px",
         paddingBottom: "20px",
-        alignItems: "center",
-        justifyContent: "center",
+
       },
       singleContainer: {
         width: "100%",
@@ -72,9 +70,23 @@ const styles: Styles={
         overflowX: "auto",
         gap: "60px",
       },
+      title: {
+        fontWeight: "Bold",
+        width: "100%",
+        padding: "10px 0",
+      },
+      titles: {
+        fontWeight: "Bold",
+        width: "20%",
+        padding: "10px 0",
+      },
 };
     return (
+      
         <Box sx={styles.container}>
+           <Box sx={styles.singleContainer}>
+           <Typography variant="h2" sx={styles.title}>Esucha Tus Albumes Preferidos</Typography>
+           </Box>
         <Box sx={styles.AlbumsContainer}>
     <Box sx={styles.albumsList}>
           {albums.map((album) => (
@@ -88,8 +100,9 @@ const styles: Styles={
         </Box>
 
         <Box sx={styles.singerContainer}>
+        <Typography variant="h3" sx={styles.titles}>Tus Artistas Favoritos</Typography>
         <Box sx={styles.singerList}>
-        {singers.slice(0,6).map((singer) => (
+        {singers.slice(0,8).map((singer) => (
               <ArtistCard {...singer} 
               key={`singer-${singer.id}`} 
               artist={singer.stageName} 
@@ -99,6 +112,7 @@ const styles: Styles={
         </Box>
 
         <Box sx={styles.singleContainer}>
+        <Typography variant="h4" sx={styles.titles}>Tus Sencillos Mas Escuchados</Typography>
         <Box sx={styles.singleList}>
         <Box sx={{ width: '100%' }}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>

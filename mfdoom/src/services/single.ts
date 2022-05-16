@@ -20,7 +20,6 @@ import {setSingles, setSingle} from "../features/musicSlice";
     }
   };
   export const getSingleById = (id) => async (dispatch: AppDispatch) => {
-    console.log("HOLA");
     try {
       dispatch(setLoading(true));
       const response = await fetch(`http://3.218.67.164:9005/apiMusic/singleSong/${id}`);
@@ -36,7 +35,6 @@ import {setSingles, setSingle} from "../features/musicSlice";
     }
   };
   export const getSinglesById = (id) => async (dispatch: AppDispatch) => {
-    console.log("HOLA");
     try {
       dispatch(setLoading(true));
       const response = await fetch(`http://3.218.67.164:9005/apiMusic/singleSong/${id}`);

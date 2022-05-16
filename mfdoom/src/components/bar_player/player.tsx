@@ -4,18 +4,14 @@ import { useMemo} from "react";
 import { Styles } from "../../theme/types";
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
-import {playerSelector } from "../../features/playerSlice";
+import {playerSelector} from "../../features/playerSlice";
+import {singlesSelector } from "../../features/musicSlice";
 import { useAppSelector } from "../../app/hooks";
 import { faPlay, faPause } from "@fortawesome/free-solid-svg-icons";
 const Player = ()=>{
     const playerUrl = useAppSelector(playerSelector);
-    const playerState=false;
-    if(playerUrl!=='undefined'){
-        const playerState=true;
-        console.log(playerState);
-    }
-    
-    const [value, setValue] = React.useState(0);
+    const singles = useAppSelector(singlesSelector);
+
     const styles: Styles={
       tabs: {
         '&:last-child': {
@@ -39,16 +35,15 @@ const Player = ()=>{
         padding:"20px",
       },
     };
-    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-      setValue(newValue);
-    };
+
     return (
     <>
     <Box sx={styles.boxing}>
     <AudioPlayer
-    src="https://res.cloudinary.com/dhz4matkl/video/upload/v1652680723/musica/150_v1_mw1emc.mp3"
-    onPlay={e => console.log("onPlay")}
-    />
+                autoPlay
+                header={singles.name}
+                src={playerUrl}
+                onPlay={e => console.log('onPlay')}/>
     </Box>  
     </>
     )
