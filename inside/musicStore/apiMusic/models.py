@@ -9,7 +9,7 @@ class Singer(models.Model):
     lastName=models.CharField(max_length=128)
     nationality=models.CharField(max_length=128)
     image= models.TextField()
-    biography=models.TextField(max_length=255)
+    biography=models.TextField()
     def __str__(self):
         return self.stageName
         
@@ -52,7 +52,7 @@ class SingleSong(models.Model):
     singerSingle=models.ManyToManyField(Singer, through='SinglesSingers')
     duration=models.CharField(max_length=20)
     completeFile=models.CharField(max_length=128)
-    previewFile=models.CharField(max_length=128)
+    previewFile=models.FileField(blank=True, null=True, upload_to='documents/')
     price=models.DecimalField(max_digits = 6, decimal_places = 2)
     recordLabel=models.CharField(max_length=128)
     image= models.TextField()

@@ -8,34 +8,33 @@ from rest_framework import permissions
 class SongViewSet(viewsets.ModelViewSet):
     queryset = Song.objects.all()
     serializer_class = SongSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = []
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['album', 'singers']
 
 class AlbumViewSet(viewsets.ModelViewSet):
     queryset = Album.objects.all()
     serializer_class = AlbumSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = []
 
 class GenreViewSet(viewsets.ModelViewSet):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = []
 
 class SingerViewSet(viewsets.ModelViewSet):
     queryset = Singer.objects.all()
     serializer_class = SingerSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = []
 
 class SingleSongView(viewsets.ModelViewSet):
     queryset = SingleSong.objects.all()
     serializer_class = SingleSongSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = []
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['singerSingle']
 
 class SinglesSingersViewSet(viewsets.ModelViewSet):
     queryset = SinglesSingers.objects.all()
     serializer_class = SinglesSingersSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]   
-  
+    permission_classes = []   
