@@ -17,7 +17,7 @@ services:
     command: "-p 5505"
 
   web05:
-    build: .
+    build: ./inside
     command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8005"
     container_name: "django05"
     depends_on: 
@@ -36,6 +36,20 @@ services:
       - "9005:8005"
     networks:
       - our-library-net
+
+  front05:
+    build: ./mfdoom
+    command: sh -c "yarn install && yarn start"
+    container_name: react05
+    volumes:
+      - "/home/antony_juarez/musicProject/mfdoom:/app"
+    ports:
+      - "11005:3000"
+    stdin_open: true
+    tty: true
+    networks:
+      - our-library-net
+
 networks:
   our-library-net:
     external: true
